@@ -10,5 +10,11 @@
         "author": "Jane Doe",
         "title": "Second Post",
         "content": "This is another post."
+    },
+    {
+        "id": 3,
+        "author": "Mia",
+        "title": "Great. Weather!",
+        "content": "Wow! \r\nSuch good weather on Monday!\r\nOne of my favorite study days with my sis<3"
     }
 ]
