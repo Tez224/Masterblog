@@ -25,3 +25,23 @@ h1 {
 .post p {
     margin: 10px 0;
 }
+
+.post-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFF;
+    border: 1px solid #DDD;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.del_btn button {
+    background-color: #E53935;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}

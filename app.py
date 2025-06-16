@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -43,6 +43,30 @@ def add():
 
     # GET: Show form
     return render_template('add.html')
+
+
+@app.route('/delete/<post_id>', methods=['GET', 'POST'])
+def delete_post(post_id):
+    try:
+        post_id = int(post_id)
+    except ValueError:
+        return render_template('index.html', message="Invalid post ID.")
+
+    with open('storage/storage.json', 'r') as file:
+        blog_posts = json.load(file)
+
+    # Check if the post exists
+    updated_posts = [post for post in blog_posts if post['id'] != post_id]
+
+    if len(updated_posts) == len(blog_posts):
+        error_message = "Can't delete this post."
+        return render_template('index.html', posts=blog_posts, message=error_message)
+
+    # Save the updated post list
+    with open('storage/storage.json', 'w') as file:
+        json.dump(updated_posts, file, indent=2)
+
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)
