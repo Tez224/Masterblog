@@ -100,5 +100,35 @@ def update_post(post_id):
     # Show the update form
     return render_template('update.html', post=post)
 
+
+@app.route('/like/<post_id>', methods=['GET', 'POST'])
+def like_post(post_id):
+    try:
+        post_id = int(post_id)
+    except ValueError:
+        return render_template('index.html', message="Invalid post ID.")
+
+    # Load all blog posts
+    with open('storage/storage.json', 'r') as file:
+        blog_posts = json.load(file)
+
+    # Find the post by ID
+    post_found = False
+    for post in blog_posts:
+        if post['id'] == post_id:
+            # Make sure 'likes' field exists
+            post['likes'] = post.get('likes', 0) + 1
+            post_found = True
+            break
+
+    if not post_found:
+        return "Post not found", 404
+
+    with open('storage/storage.json', 'w') as file:
+        json.dump(blog_posts, file, indent=2)
+
+    return redirect(url_for('index'))
+
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

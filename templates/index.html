@@ -23,6 +23,9 @@
                 <form action="{{ url_for('delete_post', post_id=post.id) }}" method="post">
                     <button class="delete-btn" type="submit">Delete Post</button>
                 </form>
+                <form action="{{ url_for('like_post', post_id=post.id) }}" method="post">
+                    <button class="like-btn" type="submit">like!<br>{{ post.likes }}</button>
+                </form>
             </div>
         </div>
         {% endfor %}

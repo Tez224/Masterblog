@@ -61,3 +61,8 @@ h1 {
 .delete-btn {
     background-color: #ff0000; /* red */
 }
+
+/* Style the like button */
+.like-btn {
+    background-color: #007bff; /* blue */
+}
